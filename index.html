@@ -1,0 +1,107 @@
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function computerChoice() {
+const computerChooses = getRandomInt(3);
+let computerGuess = "";
+
+if (computerChooses === 0) {
+computerGuess = "rock";
+} else if (computerChooses === 1) {
+computerGuess = "paper";
+}
+else if (computerChooses === 2) {
+computerGuess = "scissors";
+}
+return computerGuess;
+}
+
+
+let computerScore = 0; 
+let humanScore = 0;
+
+
+function playRound(humanChoice, computerChoice) {
+
+
+if (humanChoice === computerChoice) {
+console.log("It's a tie!");
+return true;
+
+} else if (humanChoice === "rock" && computerChoice === "paper") {
+computerScore++;
+console.log("Computer wins with paper over rock");
+return computerScore;
+
+}
+else if (humanChoice === "rock" && computerChoice === "scissors") {
+console.log("Human wins with rock over scissors");
+humanScore++;
+console.log(humanScore);
+return false;
+
+}
+else if (humanChoice === "paper" && computerChoice === "scissors") {
+console.log("Computer wins with scissors over paper");
+computerScore++;
+console.log(computerScore);
+return false;
+
+}
+else if (humanChoice === "paper" && computerChoice === "rock") {
+console.log("Human wins with paper  over rock");
+humanScore++;
+console.log(humanScore);
+return false;
+
+}
+else if (humanChoice === "scissors" && computerChoice === "paper") {
+console.log("Human wins with scissors over paper");
+humanScore++;
+console.log(humanScore);
+return false;
+
+}
+else if (humanChoice === "scissors" && computerChoice === "rock") {
+console.log("Computer wins with rock over scissors");
+computerScore++;
+console.log(computerScore);
+return false;
+
+}
+
+
+}
+function playGame() {
+let humanChoice = prompt("Round -1 Rock, Paper, or Scissors?");
+playRound(humanChoice, computerChoice());
+console.log(humanScore, computerScore);
+humanChoice = prompt("Round -2 Rock, Paper, or Scissors?"); playRound(humanChoice, computerChoice());
+
+console.log(humanScore, computerScore);
+humanChoice = prompt("Round -3 Rock, Paper, or Scissors?");
+playRound(humanChoice, computerChoice());
+
+console.log(humanScore, computerScore);
+humanChoice = prompt("Round -4 Rock, Paper, or Scissors?");
+playRound(humanChoice, computerChoice());
+
+console.log(humanScore, computerScore);
+humanChoice = prompt("Round -5 Rock, Paper, or Scissors?");
+playRound(humanChoice, computerChoice());
+
+console.log(humanScore, computerScore);
+}
+playGame();
+
+function announceWinner (humanScore, computerScore) {
+if (humanScore > computerScore) {
+console.log ("Human has won") }
+else if (computerScore > humanScore)
+{
+console.log ("computer has won")
+}
+}
+
+announceWinner(humanScore, computerScore);
