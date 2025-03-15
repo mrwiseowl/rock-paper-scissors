@@ -1,4 +1,48 @@
-function getRandomInt(max) {
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Number guessing game</title>
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+      .lastResult {
+        color: white;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Rock, paper, or scissors</h1>
+
+    <p>
+Pick either rock, paper, or scissors.
+    </p>
+
+
+<button id="rock-btn">Rock</button>
+<button id="paper-btn">Paper</button>
+<button id="scissors-btn">Scissors</button>
+ 
+
+  <div id="container">
+    <div class="content">Score</div>
+    <ul>
+
+    </ul>
+  </div>
+<script>
+  function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
@@ -73,35 +117,67 @@ return false;
 
 
 }
-function playGame() {
-let humanChoice = prompt("Round -1 Rock, Paper, or Scissors?");
-playRound(humanChoice, computerChoice());
-console.log(humanScore, computerScore);
-humanChoice = prompt("Round -2 Rock, Paper, or Scissors?"); playRound(humanChoice, computerChoice());
+// First, select your buttons
+let rockBtn = document.getElementById('rock-btn');
+let paperBtn = document.getElementById('paper-btn');
+let scissorsBtn = document.getElementById('scissors-btn');
 
-console.log(humanScore, computerScore);
-humanChoice = prompt("Round -3 Rock, Paper, or Scissors?");
-playRound(humanChoice, computerChoice());
+// Then add event listeners to each button
+rockBtn.addEventListener('click', () => {
+let computerSelection = computerChoice();
+playRound("rock", computerSelection);
+updateScoreDisplay(computerScore, humanScore);
+checkForWinner(computerScore, humanScore);
 
-console.log(humanScore, computerScore);
-humanChoice = prompt("Round -4 Rock, Paper, or Scissors?");
-playRound(humanChoice, computerChoice());
 
-console.log(humanScore, computerScore);
-humanChoice = prompt("Round -5 Rock, Paper, or Scissors?");
-playRound(humanChoice, computerChoice());
+});
 
-console.log(humanScore, computerScore);
+paperBtn.addEventListener('click', () => {
+let computerSelection = computerChoice();
+playRound("paper", computerSelection);
+updateScoreDisplay(computerScore, humanScore);
+checkForWinner(computerScore, humanScore);
+
+
+});
+
+scissorsBtn.addEventListener('click', () => {
+let computerSelection = computerChoice();
+playRound("scissors", computerSelection);
+updateScoreDisplay(computerScore, humanScore);
+checkForWinner(computerScore, humanScore);
+
+
+
+});
+
+
+function updateScoreDisplay(computerScore, humanScore) {
+const content = document.createElement("div");
+content.textContent = `Human: ${humanScore} | Computer ${computerScore} `;
+container.appendChild(content);
 }
-playGame();
 
-function announceWinner (humanScore, computerScore) {
-if (humanScore > computerScore) {
-console.log ("Human has won") }
-else if (computerScore > humanScore)
-{
-console.log ("computer has won")
-}
+
+function checkForWinner(computerScore, humanScore) {
+const content = document.createElement("div");
+content.classList.add("content");
+
+
+  if (computerScore === 5)
+  {
+content.textContent = "Computer has won the game";
+container.appendChild(content);
+  } else if (humanScore === 5) {
+content.textContent = "Human has won the game";
+container.appendChild(content);
+
+  }
 }
 
-announceWinner(humanScore, computerScore);
+
+
+</script>
+
+  </body>
+</html>
